@@ -37,8 +37,9 @@ def send(text):
     function = "send"
 
     response = requests.get(
-        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
-        {"chat_id": USER_CHAT_ID, "text": text}
+        url=f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+        params={"chat_id": USER_CHAT_ID, "text": text},
+        headers={"Accept": "application/json"}
     )
 
     if not response.ok:
@@ -94,14 +95,12 @@ def main():
     try:
         UPBIT_ACCESS = get_env("upbit_access")
         UPBIT_SECRET = get_env("upbit_secret")
-
-        upbit = pyupbit.Upbit(UPBIT_ACCESS, UPBIT_SECRET)
-        send(upbit.get_balance("KRW"))
-
         BOT_TOKEN = get_env("bot_token")
         USER_CHAT_ID = get_env("user_chat_id")
 
-        send("Program started")
+        upbit = pyupbit.Upbit(UPBIT_ACCESS, UPBIT_SECRET)
+
+        send(f"Program started ({"{:,}".format(int(upbit.get_balance("KRW")))})")
 
         check_btc = True
         check_running = True
