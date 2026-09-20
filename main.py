@@ -136,10 +136,10 @@ def main():
             else:
                 check_btc = True
 
-            if now.hour == 12:
+            if now.hour % 8 == 0:
                 if check_running:
                     oscillator = get_oscillator()
-                    send(f"Program running ({"{:,}".format(int(oscillator))}")
+                    send(f"Program running ({"{:,}".format(int(oscillator))})")
 
                     check_running = False
             else:
