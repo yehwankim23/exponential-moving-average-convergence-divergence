@@ -117,7 +117,7 @@ def main():
         try:
             now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
 
-            if now.hour == 8 and now.minute >= 50:
+            if now.hour == 9 and now.minute > 0:
                 if check_btc:
                     oscillator = get_oscillator()
 
