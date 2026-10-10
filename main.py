@@ -117,7 +117,7 @@ def main():
         try:
             now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
 
-            if now.hour == 8 and now.minute >= 50:
+            if now.hour == 9 and now.minute > 0:
                 if check_btc:
                     oscillator = get_oscillator()
 
@@ -136,10 +136,10 @@ def main():
             else:
                 check_btc = True
 
-            if now.hour == 12:
+            if now.hour % 8 == 0:
                 if check_running:
                     oscillator = get_oscillator()
-                    send(f"Program running ({oscillator})")
+                    send(f"Program running ({"{:,}".format(int(oscillator))})")
 
                     check_running = False
             else:
