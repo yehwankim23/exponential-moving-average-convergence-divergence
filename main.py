@@ -57,7 +57,7 @@ def get_prices(count):
     function = "get_prices"
 
     response = requests.get(
-        url="https://api.upbit.com/v1/candles/days",
+        url="https://api.upbit.com/v1/candles/minutes/60",
         params={"market": "KRW-BTC", "count": count},
         headers={"Accept": "application/json"}
     )
@@ -117,7 +117,7 @@ def main():
         try:
             now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
 
-            if now.hour == 9 and now.minute > 0:
+            if now.minute < 30:
                 if check_btc:
                     oscillator = get_oscillator()
 
@@ -129,8 +129,10 @@ def main():
                     else:
                         krw = upbit.get_balance("KRW")
 
-                        if krw > 10000:
+                        if krw >= 10000:
                             upbit.buy_market_order("KRW-BTC", krw * 0.9995)
+                         else:
+                             send("KRW balance < 10,000")
 
                     check_btc = False
             else:
