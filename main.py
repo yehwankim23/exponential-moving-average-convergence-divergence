@@ -131,8 +131,8 @@ def main():
 
                         if krw >= 10000:
                             upbit.buy_market_order("KRW-BTC", krw * 0.9995)
-                         else:
-                             send("KRW balance < 10,000")
+                        else:
+                            send("KRW balance < 10,000")
 
                     check_btc = False
             else:
