@@ -57,7 +57,7 @@ def get_prices(count):
     function = "get_prices"
 
     response = requests.get(
-        url="https://api.upbit.com/v1/candles/minutes/60",
+        url="https://api.upbit.com/v1/candles/days",
         params={"market": "KRW-BTC", "count": count},
         headers={"Accept": "application/json"}
     )
